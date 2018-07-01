@@ -2,7 +2,8 @@
 
 I'm gonna try and predict the pixel values of Garfield comics.
 
-(I'm not sharing *how* or *if* I got the Garfield comics, but I did get 'em.)
+(I'm not sharing *how* I got the Garfield comics I used for training data,
+but I did get 'em, all the decades and decades worth.)
 
 Things I can try that spring to mind:
 
