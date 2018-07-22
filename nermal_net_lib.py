@@ -1,4 +1,5 @@
 import imageio
+import numpy
 import os
 
 
@@ -18,5 +19,14 @@ def GetFilenames(data_dir):
 
 
 def LoadGIF(gif_filename, gray=True):
-    """Returns a numpy array of the GIF."""
-    return imageio.imread(gif_filename, format="gif")
+    """Returns a 2- or 3-D numpy array of the GIF (or None on fail)"""
+    # This should be of shape (num rows, num cols, 4)
+    try:
+        img = imageio.imread(gif_filename, format="gif")
+    except ValueError:
+        return None
+    if len(img.shape) != 3 or img.shape[2] != 4 or img[:, :, 3].mean() != 255:
+        return None
+    if not gray:
+        return img
+    return numpy.dot(img[..., :3], [0.2989, 0.587, 0.144])

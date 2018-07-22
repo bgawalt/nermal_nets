@@ -21,10 +21,15 @@ instead.
 
 ## TODO
 
-* Load GIFs in B/W, as Numpy arrays
+Organizationally, I should probably set up a `scripts/` directory which can link
+back to and make use of `nermal_net_lib.py`.
+
+* Write up image size exploration results
+* Build image-size-standardizer
+  * Ignore all images that don't have exactly 600 columns
+  * Ignore all images with over 180 rows or under 170 rows
+  * Pad remaining images with whitespace up to exactly 180 rows, centering image
 * Save manipulated GIFs
-* Histogram GIF sizes
-* Standardize GIF size
 * Split by panels
 * Panel autoencoder via PCA
   * Reconstruction error: min and max
@@ -32,3 +37,8 @@ instead.
   * Across one panel
   * Across one strip
 * Predict final panel from first two panels
+
+### Done!
+
+* Load GIFs in B/W, as Numpy arrays
+* Histogram GIF sizes

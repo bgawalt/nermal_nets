@@ -3,13 +3,15 @@
 
 import imageio
 import nermal_net_lib as nrm
+import random
 
 
 def main():
-    giffile = nrm.GetFilenames("./data/")[0]
-    print giffile
-    arr = nrm.LoadGIF(giffile)
-    print arr.shape
+    random.seed(12345)
+    sample_files = random.sample(nrm.GetFilenames("./data/"), 20)
+    arrs = [nrm.LoadGIF(giffile) for giffile in sample_files]
+    for fname, arr in zip(sample_files, arrs):
+        print fname, ":", arr.shape
 
 
 if __name__ == "__main__":
