@@ -33,6 +33,7 @@ back to and make use of `nermal_net_lib.py` -- something like
 * Save manipulated GIFs
 * Split by panels
 * Panel autoencoder via PCA
+  * [IncrementalPCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn-decomposition-incrementalpca)
   * Reconstruction error: min and max
 * Predict next column from previous columns
   * Across one panel
