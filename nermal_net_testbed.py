@@ -14,7 +14,8 @@ def main():
 
     arr = arrs[0]
     int_arr = nrm.ToUnsignedByte(arr)
-    for arr_i, int_arr_i in random.sample(zip(arr.ravel(), int_arr.ravel()), 100):
+    lucky_pairs = random.sample(zip(arr.ravel(), int_arr.ravel()), 100)
+    for arr_i, int_arr_i in lucky_pairs:
         print arr_i, int_arr_i
     pairs = sorted([(a, i) for a, i in zip(arr.ravel(), int_arr.ravel())],
                    key=lambda t: abs(t[1] - t[0]))

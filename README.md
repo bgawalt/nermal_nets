@@ -19,6 +19,11 @@ images, but its
 now suggests you use [ImageIO](http://imageio.readthedocs.io/en/latest/index.html)
 instead.
 
+There's also, of course, the matter of the actual Garfield comics.  This library
+is expecting a nested directory structure: the function `GetFilenames` will
+scan a given "root" folder for subdirectories, and grab every filename ending
+in `".gif"`.  (It ignores any GIF files living directly inside `data`.)
+
 ## TODO
 
 Organizationally, I should probably set up a `scripts/` directory which can link
