@@ -1,8 +1,9 @@
+import imageio
 import os
 
 
 def GetFilenames(data_dir):
-    """Get filenames for Garfield comics in .gif format.
+    """Returns filenames for Garfield comics in .gif format in given directory.
 
     (Doesn't actually check if they *are* gifs, just if they *end* in 'gif'.)
     """
@@ -16,9 +17,6 @@ def GetFilenames(data_dir):
     return gifs
 
 
-def main():
-    print GetFilenames("./data/")
-
-
-if __name__ == "__main__":
-    main()
+def LoadGIF(gif_filename, gray=True):
+    """Returns a numpy array of the GIF."""
+    return imageio.imread(gif_filename, format="gif")
