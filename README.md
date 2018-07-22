@@ -26,6 +26,7 @@ back to and make use of `nermal_net_lib.py` -- something like
 [this](https://docs.python-guide.org/writing/structure/#test-suite).
 
 * Write up image size exploration results
+* Demo B/W conversion
 * Build image-size-standardizer
   * Ignore all images that don't have exactly 600 columns
   * Ignore all images with over 180 rows or under 170 rows

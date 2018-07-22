@@ -18,6 +18,11 @@ def GetFilenames(data_dir):
     return gifs
 
 
+def ToUnsignedByte(arr):
+    """Convert a GIF array to one-byte-per-channel."""
+    return numpy.minimum(numpy.maximum(arr.round(), 0), 255).astype(numpy.uint8)
+
+
 def LoadGIF(gif_filename, gray=True):
     """Returns a 2- or 3-D numpy array of the GIF (or None on fail)"""
     # This should be of shape (num rows, num cols, 4)
@@ -29,4 +34,9 @@ def LoadGIF(gif_filename, gray=True):
         return None
     if not gray:
         return img
-    return numpy.dot(img[..., :3], [0.2989, 0.587, 0.144])
+    return ToUnsignedByte(numpy.dot(img[..., :3], [0.2989, 0.587, 0.144]))
+
+
+def PadGIF(gif_array):
+    if gif_array.shape[1] != 600:
+        return None
