@@ -22,7 +22,8 @@ instead.
 ## TODO
 
 Organizationally, I should probably set up a `scripts/` directory which can link
-back to and make use of `nermal_net_lib.py`.
+back to and make use of `nermal_net_lib.py` -- something like
+[this](https://docs.python-guide.org/writing/structure/#test-suite).
 
 * Write up image size exploration results
 * Build image-size-standardizer
