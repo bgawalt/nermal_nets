@@ -53,3 +53,17 @@ def PadGIF2D(gif_array):
     end_row = start_row + gif_array.shape[0]
     out[start_row:end_row , :] = gif_array
     return out
+
+
+def GetPanelFilename(strip_filename, panel_id):
+    """A filename for a particular strip panel."""
+    return "%s_panel%d.gif" % (strip_filename.split("/")[-1][:-4], panel_id)
+
+
+def GetPanels(gif_array):
+    """Returns trio of 180 row, 200 column gif arrays, one per panel."""
+    if gif_array.shape != (180, 600):
+        return None
+    return (numpy.array(gif_array[:, :200]),
+            numpy.array(gif_array[:, 200:400]),
+            numpy.array(gif_array[:, 400:]))

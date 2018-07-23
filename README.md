@@ -33,8 +33,7 @@ back to and make use of `nermal_net_lib.py` -- something like
 * Write up image size exploration results
 * Write up image pixel intensity histogram results
 * Write up image standardizer
-* Save manipulated GIFs
-* Split by panels
+* Write up panel extractor
 * Panel autoencoder via PCA
   * [IncrementalPCA](http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.IncrementalPCA.html#sklearn-decomposition-incrementalpca)
   * Reconstruction error: min and max
@@ -51,4 +50,6 @@ back to and make use of `nermal_net_lib.py` -- something like
 * Build image-size-standardizer
   * Ignore all images that don't have exactly 600 columns
   * Ignore all images with over 180 rows or under 170 rows
-  * Pad remaining images with whitespace up to exactly 180 rows, centering image
+* Pad remaining images with whitespace up to exactly 180 rows, centering image
+* Save manipulated GIFs
+* Split by panels
