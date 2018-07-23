@@ -37,6 +37,19 @@ def LoadGIF(gif_filename, gray=True):
     return ToUnsignedByte(numpy.dot(img[..., :3], [0.2989, 0.587, 0.144]))
 
 
-def PadGIF(gif_array):
+def SaveGIF(gif_array, filename):
+    imageio.imwrite(filename, gif_array, format="gif")
+
+
+def PadGIF2D(gif_array):
+    """Pads a 2-D array's rows out to 180.  Returns None if shape is off."""
     if gif_array.shape[1] != 600:
         return None
+    if gif_array.shape[0] > 180:
+        return None
+    out = numpy.full((180, 600), 255, dtype=numpy.uint8)
+    missing = 180 - gif_array.shape[0]
+    start_row = missing / 2
+    end_row = start_row + gif_array.shape[0]
+    out[start_row:end_row , :] = gif_array
+    return out

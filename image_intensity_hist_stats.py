@@ -4,7 +4,6 @@ Usage:
 
   $ python image_intensity_hist.py output.csv
 
-
 Output format: first column is intensity value, subsequent columns
 each represent a percentiles on the number of pixels with that intensity across
 a large sample of comics.  I.e., what's the median value of a comics' count of
