@@ -1,6 +1,8 @@
 import imageio
 import numpy
 import os
+import pickle
+import sqlite3
 
 
 def GetFilenames(data_dir):
@@ -61,9 +63,45 @@ def GetPanelFilename(strip_filename, panel_id):
 
 
 def GetPanels(gif_array):
-    """Returns trio of 180 row, 200 column gif arrays, one per panel."""
+    """Returns 3-tuple of 180 row, 200 column gif arrays, one per panel."""
     if gif_array.shape != (180, 600):
         return None
     return (numpy.array(gif_array[:, :200]),
             numpy.array(gif_array[:, 200:400]),
             numpy.array(gif_array[:, 400:]))
+
+
+def SaveAllPanelsToDB(data_dir, db_filename):
+    conn = sqlite3.connect(db_filename)
+    cur = conn.cursor()
+    cur.execute("create table PANELS "
+                "(filename text, panel_id integer, panel_vector text)")
+    cur.close()
+    total = 0
+    success = 0
+    for filename in GetFilenames(data_dir):
+        total += 1
+        if SavePanelsAsVectors(conn, filename):
+            success += 1
+    print success, "successes out of", total, "total"
+    conn.close()
+
+
+def SavePanelsAsVectors(db_conn, gif_filename):
+    cur = db_conn.cursor()
+    arr = LoadGIF(gif_filename)
+    if arr is None:
+        return False
+    pad = PadGIF2D(arr)
+    if pad is None:
+        return False
+    panels = GetPanels(pad)
+    if panels is None:
+        return False
+    for panel_id, panel in enumerate(panels):
+        vec = panel.reshape(1, 180 * 200)
+        pkl = pickle.dumps(vec)
+        cur.execute("insert into PANELS values (?, ?, ?)",
+                    (gif_filename, panel_id, pkl))
+    db_conn.commit()
+    return True

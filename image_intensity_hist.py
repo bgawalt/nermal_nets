@@ -23,18 +23,21 @@ def main(args):
     sample_files = random.sample(nrm.GetFilenames("./data/"), 30)
     arrs = [nrm.LoadGIF(giffile) for giffile in sample_files]
 
+    hist = nrm.Histogram()
+
     all_hists = []
     for arr in arrs:
-        val_counts = [0 for _ in range(256)]
-        for pixel in arr.ravel():
-            val_counts[pixel] += 1
-        all_hists.append(val_counts)
+        hist.AddPanel(arr)
 
-    with open(outfilename, "w") as outfile:
-        outfile.write("Intensity," + ",".join(sample_files) + "\n")
-        for i in range(256):
-            row = ",".join([str(hist[i]) for hist in all_hists])
-            outfile.write(str(i) + "," + row + "\n")
+    counts = hist.Counts()
+    s = 0
+    total = sum(counts)
+    for pixel_val, count in enumerate(counts):
+        s += count
+        if count < 0.01 * total:
+            continue
+        print "%d\t%0.3f\t%0.3f" % (
+            pixel_val, float(count) / total, float(s) / total)
 
 
 if __name__ == "__main__":

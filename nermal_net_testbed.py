@@ -6,11 +6,32 @@ import nermal_net_lib as nrm
 import numpy
 import random
 
+import pickle
+import base64
+
 
 def main():
     random.seed(12345)
-    sample_files = random.sample(nrm.GetFilenames("./data/"), 20)
-    arrs = [nrm.LoadGIF(giffile) for giffile in sample_files]
+    sample_files = random.sample(nrm.GetFilenames("./data/"), 4)
+
+    nrm.SaveAllPanelsToDB("./data", "nermal.db")
+
+    return
+
+    for giffile in sample_files:
+        int_arr = nrm.LoadGIF(giffile)
+        if int_arr is None:
+            continue
+        pad_arr = nrm.PadGIF2D(int_arr)
+        if pad_arr is None:
+            continue
+        for panel in nrm.GetPanels(pad_arr):
+            print base64.encodestring(pickle.dumps(panel))
+            print ''
+
+    return
+
+
 
     arr = arrs[0]
     int_arr = nrm.ToUnsignedByte(arr)
